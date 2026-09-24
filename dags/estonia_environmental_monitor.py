@@ -1,4 +1,12 @@
 # dags/estonia_environmental_monitor.py
+import sys
+from pathlib import Path
+
+# Make the project root importable so 'from src...' works from any cwd
+project_root = str(Path(__file__).resolve().parent.parent)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 import csv
 import json
 from datetime import datetime, timedelta
