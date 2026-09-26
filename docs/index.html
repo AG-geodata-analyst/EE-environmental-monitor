@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estonia Environmental Forecast</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <header>
-        <h1>🇪🇪 Estonia Environmental Forecast</h1>
+        <h1>
+	    <svg viewBox="0 0 33 21" class="flag" aria-label="Estonia flag" role="img">
+		<rect width="33" height="7" fill="#0072CE"/>
+		<rect y="7" width="33" height="7" fill="#000000"/>
+		<rect y="14" width="33" height="7" fill="#FFFFFF"/>
+    	    </svg>
+	    Estonia Environmental Forecast
+	</h1>
         <p class="subtitle">7-day weather &amp; air-quality forecast for 6 Estonian cities</p>
         <div id="status-bar" class="status-bar"><span id="last-updated">Loading…</span></div>
     </header>

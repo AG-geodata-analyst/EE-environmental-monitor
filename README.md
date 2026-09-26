@@ -1,4 +1,4 @@
-# 🇪🇪 Estonia Environmental Forecast Monitor
+# Estonia Environmental Forecast Monitor
 
 > An automated data pipeline that fetches a 7-day weather and air-quality forecast for six Estonian cities, validates it, loads it into PostgreSQL, runs data-quality checks, and publishes a live dashboard on GitHub Pages.
 

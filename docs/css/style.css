@@ -18,3 +18,11 @@ canvas { max-width: 100%; }
 a { color: #58a6ff; }
 .tech-stack { margin-top: .5rem; color: #8b949e; font-size: .9rem; }
 footer { text-align: center; padding: 2rem; color: #8b949e; font-size: .85rem; border-top: 1px solid #30363d; }
+.flag {
+    height: 0.85em;
+    width: auto;
+    vertical-align: -0.1em;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    margin-right: 0.4rem;
+}
