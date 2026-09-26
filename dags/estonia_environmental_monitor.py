@@ -206,6 +206,8 @@ def estonia_environmental_monitor():
     # ------------------------------------------------------------------
     @task
     def publish_data() -> None:
+        import math
+
         pg = PostgresHook(postgres_conn_id="postgres_env_monitor")
 
         rows = pg.get_records(
@@ -221,37 +223,36 @@ def estonia_environmental_monitor():
 
         os.makedirs("docs/data", exist_ok=True)
 
+        keys = [
+            "city_id", "latitude", "longitude", "date",
+            "temperature_max", "temperature_min", "precipitation_sum",
+            "wind_speed_max", "pm2_5", "pm10", "nitrogen_dioxide", "ozone",
+        ]
+
+        def _clean(v):
+            """Convert NaN → None and datetimes → ISO strings."""
+            if v is None:
+                return None
+            if isinstance(v, float) and math.isnan(v):
+                return None
+            if hasattr(v, "isoformat"):
+                return str(v)
+            return v
+
         payload = {
             "generated_at": datetime.utcnow().isoformat() + "Z",
             "forecast_days": 7,
             "cities": [
-                dict(
-                    zip(
-                        [
-                            "city_id",
-                            "latitude",
-                            "longitude",
-                            "date",
-                            "temperature_max",
-                            "temperature_min",
-                            "precipitation_sum",
-                            "wind_speed_max",
-                            "pm2_5",
-                            "pm10",
-                            "nitrogen_dioxide",
-                            "ozone",
-                        ],
-                        [str(v) if hasattr(v, "isoformat") else v for v in row],
-                    )
-                )
+                dict(zip(keys, [_clean(v) for v in row]))
                 for row in rows
             ],
         }
 
         with open("docs/data/latest.json", "w") as f:
-            json.dump(payload, f, indent=2, default=str)
+            json.dump(payload, f, indent=2, default=str, allow_nan=False)
 
         print(f"[publish_data] Wrote {len(rows)} rows to docs/data/latest.json")
+
 
     # ------------------------------------------------------------------
     # Wire the graph

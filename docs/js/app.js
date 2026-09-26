@@ -21,8 +21,10 @@ async function loadData() {
 }
 
 function formatNumber(v) {
-    if (v === null || v === undefined) return "—";
-    return Number(v).toFixed(1);
+    if (v === null || v === undefined || v === "") return "—";
+    const n = Number(v);
+    if (Number.isNaN(n)) return "—";
+    return n.toFixed(1);
 }
 
 function renderToday(cities) {
