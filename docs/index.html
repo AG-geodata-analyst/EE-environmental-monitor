@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estonia Environmental Forecast</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <h1>🇪🇪 Estonia Environmental Forecast</h1>
+        <p class="subtitle">7-day weather &amp; air-quality forecast for 6 Estonian cities</p>
+        <div id="status-bar" class="status-bar"><span id="last-updated">Loading…</span></div>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>📅 Today's Forecast</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>City</th><th>Temp Max</th><th>Temp Min</th>
+                        <th>Precip.</th><th>Wind</th>
+                        <th>PM2.5</th><th>PM10</th><th>NO₂</th><th>O₃</th>
+                    </tr>
+                </thead>
+                <tbody id="today-body"></tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>🗺️ Monitored Locations</h2>
+            <div id="map"></div>
+        </section>
+
+        <section class="card">
+            <h2>📈 7-Day Temperature Forecast</h2>
+            <canvas id="temp-chart" height="120"></canvas>
+        </section>
+
+        <section class="card">
+            <h2>About</h2>
+            <p>Automated Airflow pipeline fetching a 7-day forecast from
+            <a href="https://open-meteo.com/">Open-Meteo</a>, validating with Pydantic,
+            loading into PostgreSQL, running data-quality checks, and publishing via GitHub Pages.</p>
+            <p class="tech-stack"><strong>Stack:</strong> Airflow 3.1 · Python · Pydantic · PostgreSQL · GitHub Actions · GitHub Pages · Leaflet · Chart.js</p>
+        </section>
+    </main>
+
+    <footer><p>Data source: Open-Meteo Forecast API · Built with Apache Airflow</p></footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

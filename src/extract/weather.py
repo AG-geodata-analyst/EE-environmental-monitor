@@ -1,30 +1,36 @@
 # src/extract/weather.py
+"""Extract weather forecast data from Open-Meteo Forecast API."""
 import requests
-import pandas as pd
-import json
 
-def fetch_weather_for_locations(locations, start_date, end_date):
-    """Fetches daily weather data for a list of locations from Open-Meteo."""
-    lats = ",".join(str(loc['latitude']) for loc in locations)
-    lons = ",".join(str(loc['longitude']) for loc in locations)
+FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 
-    # Use the historical API to get data for a specific date range
-    url = "https://archive-api.open-meteo.com/v1/archive"
+def fetch_weather_for_locations(locations: list[dict], forecast_days: int = 7) -> list:
+    """
+    Fetches a multi-day weather forecast for a list of locations.
+
+    Parameters
+    ----------
+    locations : list of dicts with 'latitude' and 'longitude' keys
+    forecast_days : number of days to forecast (1-16, default 7)
+
+    Returns
+    -------
+    list of per-location response dicts (Open-Meteo returns one entry per coordinate)
+    """
+    lats = ",".join(str(loc["latitude"]) for loc in locations)
+    lons = ",".join(str(loc["longitude"]) for loc in locations)
+
     params = {
         "latitude": lats,
         "longitude": lons,
-        "start_date": start_date,
-        "end_date": end_date,
         "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max",
+        "hourly": "temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m",
+        "forecast_days": forecast_days,
         "timezone": "Europe/Tallinn",
     }
 
-    response = requests.get(url, params=params)
+    response = requests.get(FORECAST_URL, params=params, timeout=30)
     response.raise_for_status()
     data = response.json()
 
-    # The API returns a list of structures for multiple locations
-    if not isinstance(data, list):
-        data = [data]
-
-    return data
+    return data if isinstance(data, list) else [data]
