@@ -1,5 +1,12 @@
 # Estonia Environmental Forecast Monitor
 
+[![Daily Pipeline](https://github.com/AG-geodata-analyst/EE-environmental-monitor/actions/workflows/daily_run.yml/badge.svg)](https://github.com/AG-geodata-analyst/EE-environmental-monitor/actions/workflows/daily_run.yml)
+[![Live Dashboard](https://img.shields.io/badge/dashboard-live-brightgreen)](https://ag-geodata-analyst.github.io/EE-environmental-monitor/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![Airflow 3.1](https://img.shields.io/badge/airflow-3.1-017cee.svg)](https://airflow.apache.org/)
+[![PostgreSQL 16](https://img.shields.io/badge/postgres-16-336791.svg)](https://www.postgresql.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > An automated data pipeline that fetches a 7-day weather and air-quality forecast for six Estonian cities, validates it, loads it into PostgreSQL, runs data-quality checks, and publishes a live dashboard on GitHub Pages.
 
 **🔗 Live dashboard:** https://AG-geodata-analyst.github.io/EE-environmental-monitor/
