@@ -297,7 +297,9 @@ You can also trigger it manually from the **Actions** tab.
 
 ## 📜 License
 
-This project is licensed under the MIT License — you are free to use, modify, and distribute it with attribution.
+Released under the [MIT License](LICENSE).
+
+You are free to use, modify, and distribute this software, provided the original copyright notice and this permission notice are included in all copies or substantial portions of the software.
 
 ---
 
